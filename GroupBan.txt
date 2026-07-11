@@ -1,0 +1,23 @@
+
+local bannedGroups = {
+    [12345678] = "xxx",
+    [12345678] = "xxx",
+    [12345678] = "xxx",
+    [12345678] = "xxx",
+    [12345678] = "xxx",
+    [12345678] = "xxx",
+    [12345678] = "xxx"
+}
+
+
+game.Players.PlayerAdded:Connect(function(player)
+    for groupId, groupName in pairs(bannedGroups) do
+        if player:IsInGroup(groupId) then
+            -- Optional: log who got kicked and from which group
+            warn("Kicking player "..player.Name.." for being in banned group: "..groupName.." ("..groupId..")")
+
+            player:Kick("You are in a group that is banned from this game.")
+            return -- stop checking after kicking
+        end
+    end
+end)
